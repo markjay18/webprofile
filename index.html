@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=list_alt" />
+    <title>Laravel Search Optimization</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/svgBB6xJ/icon.png">
+  </head>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0 auto;
+    }
+    .scrollspy {
+      position: relative;
+      height: 500px;
+      overflow: auto;
+    }
+    .btn {
+      background-color: rgb(255, 64, 86);
+      color: white;
+      border: 1px solid rgb(255, 64, 86);
+    }
+    .def {
+      margin-bottom: 20px;
+    }
+    .navbar {
+      background-color: white!important;
+      margin: 0!important;
+      width: 100%;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+    .list-group-item.active {
+      background-color: rgb(255, 64, 86)!important;
+      border: none!important;
+    }
+    .card-header {
+      font-size: 20px;
+    }
+    .cache {
+      margin-top: 17px;
+    }
+    .list-item-design {
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      margin: 8px;
+    }
+    .card-text {
+      padding-top: 30px;
+    }
+    .bi-rocket-takeoff {
+      color: rgb(255, 64, 86)!important;
+    }
+    .logo {
+      width: 40px;
+      height: auto;
+    }
+    .bi-linkedin {
+      color: rgb(255, 64, 86);
+    }
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 2000;
+    }
+    .lg {
+      border-radius: 0!important;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center; /* vertically aligned */
+      gap: 10px; /* space between icon and image */
+    }
+    .navbar-brand .bi-list {
+      cursor: pointer;
+      color: rgb(255, 64, 86);
+      border: 1px solid rgb(255, 64, 86);
+      border-radius: 5px;
+    }
+    .offcanvas-start {
+      width: 280px!important;
+    }
+    .menu-list {
+      font-size: 14px!important;
+      margin-top: 5px!important;
+    }
+    .txt {
+      font-size: clamp(12px, 2.5vw, 15px);
+      /* white-space: pre-wrap;
+      word-break: break-word; */
+    }
+    .ex {
+      margin-bottom: -5px;
+      margin-top: 20px;
+    }
+    .bullet {
+      font-size: clamp(12px, 2.5vw, 15px);
+      margin-bottom: -5px;
+      margin-top: 4px;
+      margin-left: 12px;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      /* optional: rounded corners */
+    }
+    #copy-code {
+        position: absolute;
+        font-size: clamp(9px, 2.5vw, 13px);
+        right: 10px;
+        border: none;
+        margin: 5px;
+        color: #5d5d5d;
+    }
+    .svg-copy {
+      margin-top: -2px;
+      margin-right: 3px;
+      fill: #5d5d5d;
+    }
+    .status {
+      display: inline-flex;      /* or flex if full-width */
+      align-items: center;
+      gap: 0.9rem;               /* space between circle and text */
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .status-img {
+      width: 40px;               /* adjust size */
+      height: 40px;
+      border-radius: 50%;        /* makes it a circle */
+      object-fit: cover;         /* keeps image aspect and fills the box */
+      display: block;
+    }
+    .card {
+      margin: 5px;
+      margin-top: 5px;
+    }
+    .work {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .arrow-right {
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid #000;
+    }
+
+    .logo-container {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .content-logo {
+      display: block;
+      margin: 0 auto;
+      width: 150px;
+      height: auto;
+    }
+    .card-title {
+      font-size: clamp(26px, 2.5vw, 50px) !important;
+      font-weight: 600;
+      padding: 20px;
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .card-title {
+        width: 100%;
+        padding: 0px;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 576px) {
+      .card-title {
+        width: 100%;
+        padding: 0px;
+        margin-bottom: 20px;
+      }
+    }
+
+    .button-76 {
+      background-color: #cf245f;
+      background-image: linear-gradient(to bottom right, #fcd34d, #ef4444, #ec4899);
+      border: 0;
+      border-radius: .25rem;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      font-size: 1.125rem; /* 18px */
+      font-weight: 600;
+      line-height: 1.75rem; /* 28px */
+      padding: 1rem 1.25rem;
+      text-align: center;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      margin-top: 20px;
+    }
+
+    .button-76:hover {
+      box-shadow: none;
+    }
+
+    @media (min-width: 1024px) {
+      .button-76 {
+        font-size: 1.5rem; /* 24px */
+        padding: 1rem 1.5rem;
+        line-height: 2rem; /* 32px */
+      }
+    }
+
+    .card-text {
+      border: 1px solid #061f52;
+    }
+
+    .profile-img {
+      width: 100px;               /* adjust size */
+      height: 100px;
+      border-radius: 50%;        /* makes it a circle */
+      object-fit: cover;         /* keeps image aspect and fills the box */
+      display: block;
+      margin: 0 auto;
+    }
+
+    .card {
+      border: none!important;
+      background-color: #f4f4f4;
+    }
+
+  </style>
+  <body>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Topics</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0 m-0">
+      
+      <div class="list-group lg">
+        <a href="https://web002-five.vercel.app/" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Password Protected Folder</p>
+          </div>
+        </a>
+        <a href="https://web003-kappa.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Laravel's Catching</p>
+          </div>
+        </a>
+        <a href="https://web004.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Pest + Laravel</p>
+          </div>
+        </a>
+        <a href="https://web005.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">async, defer</p>
+          </div>
+        </a>
+        <a href="https://web006-two.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Laravel Search Optimization</p>
+          </div>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  <nav class="navbar sticky-top bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">       
+        <svg data-bs-toggle="offcanvas" href="#offcanvasExample" xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        <img class="logo ls-is-cached lazyloaded" src="https://img.eselt.de/img/18916828_7BB10W5OYUxz7zoE/ad.jpg" alt="">
+      </a>
+    </div>
+  </nav>
+    <div class="container">
+      <div class="card mb-3 logo-container">
+        <img class="content-logo ls-is-cached lazyloaded" src="https://i.ibb.co/svgBB6xJ/icon.png" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Learning core concepts for building scalable and maintainable applications.</h5>
+          <img src="https://img.eselt.de/img/18969800_8HrEtbF7agVKxYmN/ad.jpg" alt="profile" class="profile-img">
+          <button class="button-76" role="button" id="webRedirect">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+              <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+            </svg>
+            About</button>
+        </div>
+      </div>      
+    </div>
+    <footer class="bg-dark text-light pt-5">
+      <div class="container px-5">
+        <div class="row">
+          <div class="col-6 col-lg-4">
+            <p class="fw-bold">EXPERT CODING</p>
+          </div>
+          <div class="col-6 col-lg-8 text-lg-end">
+            <p>Social Media Link</p>
+            <div class="social-media pt-1">
+              <a href="https://www.linkedin.com/in/markjay-lajada-12528b310/" target="_blank" class="text-light fs-4"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="d-sm-flex justify-content-between py-1">
+          <p>2025 © MARKJAY CODING. All Rights Reserved. </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  
+  <script>
+    (() => {
+        const targetURL = "https://markjay18.github.io/tsxml-app/";
+
+        // Prevent modification of the URL variable
+        Object.freeze(targetURL);
+
+        document.getElementById("webRedirect").addEventListener("click", () => {
+            // Use noreferrer and noopener to prevent tab hijacking
+            const newWindow = window.open(targetURL, "_blank", "noopener,noreferrer");
+
+            if (newWindow) {
+                alert("Popup blocked! Please allow popups or click this link manually: " + targetURL);
+            }
+        });
+    })();
+  </script>
+
+  <script>
+
+  document.querySelectorAll('.copy-container').forEach(container => {
+    const copyButton = container.querySelector(".copy-code");
+    const svg = copyButton.querySelector(".svg-copy");
+    const codeText = container.querySelector(".codeText"); // PRE element
+    const contentToCopy = codeText.innerText.trim();       // FIXED
+
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard.writeText(contentToCopy)
+        .then(() => {
+          const originalPath = svg.innerHTML;
+          const originalLabel = copyButton.querySelector(".copyText").innerText;
+
+          svg.innerHTML = '<path d="M173.898 439.404l-166.4-166.4c-12.496-12.496-12.496-32.758 0-45.254l22.627-22.627c12.496-12.496 32.758-12.497 45.254 0L192 312.69l243.021-243.02c12.496-12.496 32.758-12.497 45.254 0l22.627 22.627c12.496 12.496 12.496 32.758 0 45.254l-307.2 307.2c-12.497 12.497-32.759 12.497-45.254-.001z"/>';
+          copyButton.querySelector(".copyText").innerText = "Copied!";
+
+          setTimeout(() => {
+            svg.innerHTML = originalPath;
+            copyButton.querySelector(".copyText").innerText = originalLabel;
+          }, 2000);
+        })
+        .catch(err => console.log(err));
+    });
+  });
+
+  </script>
+
+</html>
