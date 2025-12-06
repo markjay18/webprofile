@@ -308,7 +308,7 @@
         <svg data-bs-toggle="offcanvas" href="#offcanvasExample" xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
         </svg>
-        <img class="logo ls-is-cached lazyloaded" src="https://img.eselt.de/img/18916828_7BB10W5OYUxz7zoE/ad.jpg" alt="">
+        <img id="home" class="logo ls-is-cached lazyloaded" src="https://img.eselt.de/img/18916828_7BB10W5OYUxz7zoE/ad.jpg" alt="">
       </a>
     </div>
   </nav>
@@ -367,6 +367,12 @@
   </script>
 
   <script>
+    document.getElementById("home").addEventListener("click", function () {
+      window.location.href = "https://webprofile-plum.vercel.app/";
+    });
+  </script>
+
+  <script>
 
   document.querySelectorAll('.copy-container').forEach(container => {
     const copyButton = container.querySelector(".copy-code");
@@ -395,4 +401,5 @@
   </script>
 
 </html>
+
 
